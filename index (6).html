@@ -1,0 +1,2997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKINGBEAST Premium Forex Scalping</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Add Plotly CDN -->
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff2d75;
+            --secondary-color: #9c27b0;
+            --dark-color: #121212;
+            --darker-color: #0a0a0a;
+            --text-color: #f0f0f0;
+            --accent-color: #00e5ff;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-color) 0%, var(--dark-color) 100%);
+            opacity: 0.9;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-box {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: all 0.5s ease;
+        }
+
+        .login-box:hover {
+            transform: perspective(1000px) rotateY(5deg) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .glow-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px var(--primary-color);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px var(--primary-color);
+            }
+            100% {
+                box-shadow: 0 0 40px var(--primary-color);
+            }
+        }
+
+        .glow-logo i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 45, 117, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.6);
+        }
+
+        .login-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .login-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input {
+            margin-right: 0.5rem;
+        }
+
+        .social-login {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn.instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        .social-btn.telegram {
+            background: #0088cc;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Admin Dashboard Styles */
+        .admin-dashboard {
+            display: none;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .admin-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .admin-card {
+            background: rgba(18, 18, 18, 0.6);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title i {
+            font-size: 1.1rem;
+        }
+
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .user-table th, .user-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-table th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .user-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
+        }
+
+        .badge-warning {
+            background: rgba(255, 152, 0, 0.2);
+            color: var(--warning-color);
+        }
+
+        .badge-danger {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--danger-color);
+        }
+
+        .action-btn {
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            margin-right: 0.3rem;
+        }
+
+        .action-btn.edit {
+            background: rgba(33, 150, 243, 0.2);
+            color: #2196F3;
+        }
+
+        .action-btn.delete {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--danger-color);
+        }
+
+        .action-btn.ban {
+            background: rgba(255, 152, 0, 0.2);
+            color: var(--warning-color);
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        .theme-selector {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .theme-option {
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .theme-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .theme-option.active {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.3);
+        }
+
+        /* User Dashboard Styles */
+        .user-dashboard {
+            display: none;
+            padding: 2rem;
+        }
+
+        .user-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .user-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .strategy-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .strategy-page {
+            background: rgba(18, 18, 18, 0.6);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-content {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+        }
+
+        .page-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .motivational-quote {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            border-left: 3px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .vote-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .vote-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .vote-btn.like {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
+        }
+
+        .vote-btn.dislike {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--danger-color);
+        }
+
+        .vote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--dark-color);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--danger-color);
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .login-box {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+
+            .admin-dashboard, .user-dashboard {
+                padding: 1rem;
+            }
+
+            .theme-selector {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .strategy-page {
+                padding: 1.5rem;
+            }
+
+            .user-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .theme-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .admin-controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translateX(-5px);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 45, 117, 0.5);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(156, 39, 176, 0.2);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+    <div class="particles" id="particles-js"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
+
+    <!-- Login Container -->
+    <div class="login-container" id="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="glow-logo">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h1>TKINGBEAST </h1>
+                <p>Welcome to the 94% Win Rate Gold & Forex Scalping Strategy</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#" id="terms-link">Terms</a> and <a href="#" id="privacy-link">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <div class="login-footer">
+                <p>Don't have an account? <a href="https://rb.gy/kbq8cp" target="_blank" id="register-link">Register here</a></p>
+                <p><a href="#" id="forgot-password">Forgot password?</a></p>
+                <div class="social-login">
+                    <a href="https://www.instagram.com/tking_beast?igsh=dmpqdmR5dzlkbTN1" target="_blank" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://t.me/Eastplans" target="_blank" class="social-btn telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+                <p class="copyright">© 2025 TKINGBEAST. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="admin-dashboard">
+        <div class="admin-header">
+            <h1 class="admin-title">Admin Dashboard</h1>
+            <div class="admin-controls">
+                <button id="theme-admin-btn" class="btn btn-primary">Theme Settings</button>
+                <button id="logout-admin-btn" class="btn btn-primary">Logout</button>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2 class="card-title"><i class="fas fa-users"></i> User Management</h2>
+            <div class="table-responsive">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Status</th>
+                            <th>Device</th>
+                            <th>Last Login</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <!-- Users will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="add-user-btn" class="btn btn-primary" style="margin-top: 1rem;">Add New User</button>
+        </div>
+
+        <div class="admin-card">
+            <h2 class="card-title"><i class="fas fa-chart-bar"></i> Statistics</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>Total Users</h3>
+                    <p id="total-users">0</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Active Users</h3>
+                    <p id="active-users">0</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Banned Users</h3>
+                    <p id="banned-users">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2 class="card-title"><i class="fas fa-thumbs-up"></i> User Feedback</h2>
+            <div class="feedback-container">
+                <div class="feedback-item">
+                    <h3>Positive Votes</h3>
+                    <div id="positive-votes-list"></div>
+                </div>
+                <div class="feedback-item">
+                    <h3>Negative Votes</h3>
+                    <div id="negative-votes-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2 class="card-title"><i class="fas fa-shield-alt"></i> Security Logs</h2>
+            <div class="logs-container" id="security-logs">
+                <!-- Security logs will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div class="user-dashboard" id="user-dashboard">
+        <div class="user-header">
+            <h1 class="user-title">TKINGBEAST Scalping Strategy</h1>
+            <p class="user-subtitle">94% Win Rate | 40-300 Pips Daily</p>
+            <button id="logout-user-btn" class="btn btn-primary" style="max-width: 200px; margin: 1rem auto;">Logout</button>
+        </div>
+
+        <div class="motivational-quote">
+            "From a $400 loan to a 94% win-rate scalping strategy. Life was tough; after losing $364 and being pressured by a friend, I had only $36 left. I started learning, testing strategies, grinding demos, and finally passed a 5K funded account. I built my success with pure discipline. Remember: trading every day doesn't make you a trader."
+        </div>
+
+        <div class="strategy-container">
+            <!-- Page 1 -->
+            <div class="strategy-page fade-in" id="page-1" style="display: block;">
+                <h2 class="page-title"><i class="fas fa-chess-king"></i> Introduction to the Beast Strategy</h2>
+                <div class="page-content">
+                    <p>Welcome to the most powerful scalping strategy you'll ever encounter. This 94% win-rate approach combines price action, volume analysis, and proprietary techniques to identify high-probability trades in the gold and forex markets.</p>
+                    <p>Developed through years of trial, error, and refinement, this strategy works best in the London and New York sessions when liquidity is highest. You'll typically see moves of 40-300 pips per trade when conditions align.</p>
+                    <p>Before we dive into the specifics, remember these core principles:</p>
+                    <ul>
+                        <li>Discipline is your most important tool</li>
+                        <li>Only trade when all conditions are met</li>
+                        <li>Risk no more than 1-2% per trade</li>
+                        <li>Patience will be rewarded</li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-1"></div>
+                    <script>
+                        // Chart 1: Introduction Example
+                        const dates1 = ["2025-01-01", "2025-01-02", "2025-01-03", "2025-01-04", "2025-01-05"];
+                        const open1 = [1800, 1805, 1802, 1810, 1815];
+                        const high1 = [1808, 1810, 1808, 1815, 1820];
+                        const low1 = [1795, 1800, 1798, 1805, 1810];
+                        const close1 = [1805, 1802, 1810, 1815, 1818];
+                        const volume1 = [2500, 3000, 2800, 3500, 4000];
+
+                        const candlestick1 = {
+                            x: dates1,
+                            open: open1,
+                            high: high1,
+                            low: low1,
+                            close: close1,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "Gold Price",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors1 = close1.map((c, i) => (c >= open1[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars1 = {
+                            x: dates1,
+                            y: volume1,
+                            type: "bar",
+                            marker: { color: barColors1 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        const layout1 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                        };
+
+                        Plotly.newPlot("chart-1", [candlestick1, volumeBars1], layout1);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn" disabled>Previous</button>
+                    <button class="nav-btn next-btn" data-next="2">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="strategy-page" id="page-2" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-search"></i> Market Selection & Setup</h2>
+                <div class="page-content">
+                    <p>The Beast Strategy works best with specific instruments and timeframes. Here's what you need to know:</p>
+                    <h3>Recommended Instruments:</h3>
+                    <ul>
+                        <li><strong>XAU/USD (Gold)</strong> - Our primary market with the best results</li>
+                        <li><strong>EUR/USD</strong> - Secondary option with slightly lower win rate</li>
+                        <li><strong>GBP/JPY</strong> - Only during high volatility periods</li>
+                    </ul>
+                    <h3>Timeframes:</h3>
+                    <ul>
+                        <li><strong>15-minute chart</strong> - For overall trend direction</li>
+                        <li><strong>5-minute chart</strong> - For precise entry timing</li>
+                        <li><strong>1-minute chart</strong> - Only for scalping during news events</li>
+                    </ul>
+                    <h3>Best Trading Times:</h3>
+                    <ul>
+                        <li>London Open (8:00 AM GMT)</li>
+                        <li>London-New York Overlap (1:00 PM - 4:00 PM GMT)</li>
+                        <li>First 2 hours of US Session (1:00 PM GMT)</li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-2"></div>
+                    <script>
+                        // Chart 2: Market Selection Example
+                        const dates2 = ["08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00"];
+                        const open2 = [1.0800, 1.0805, 1.0810, 1.0808, 1.0812, 1.0815, 1.0820, 1.0825, 1.0830];
+                        const high2 = [1.0810, 1.0812, 1.0815, 1.0812, 1.0818, 1.0820, 1.0825, 1.0830, 1.0835];
+                        const low2 = [1.0795, 1.0800, 1.0805, 1.0802, 1.0808, 1.0810, 1.0815, 1.0820, 1.0825];
+                        const close2 = [1.0805, 1.0810, 1.0808, 1.0812, 1.0815, 1.0820, 1.0825, 1.0830, 1.0832];
+                        const volume2 = [1200, 1500, 1800, 2000, 2200, 2500, 2800, 3000, 3200];
+
+                        const candlestick2 = {
+                            x: dates2,
+                            open: open2,
+                            high: high2,
+                            low: low2,
+                            close: close2,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "EUR/USD",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors2 = close2.map((c, i) => (c >= open2[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars2 = {
+                            x: dates2,
+                            y: volume2,
+                            type: "bar",
+                            marker: { color: barColors2 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        const layout2 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                        };
+
+                        Plotly.newPlot("chart-2", [candlestick2, volumeBars2], layout2);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="1">Previous</button>
+                    <button class="nav-btn next-btn" data-next="3">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="strategy-page" id="page-3" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-bullseye"></i> Entry Criteria</h2>
+                <div class="page-content">
+                    <p>The entry criteria for the Beast Strategy are precise and non-negotiable. All conditions must be met before considering a trade.</p>
+                    <h3>Primary Entry Signals:</h3>
+                    <ol>
+                        <li><strong>Volume Spike</strong> - Look for at least 2x average volume on the 5-minute chart</li>
+                        <li><strong>Price Compression</strong> - Narrow range candles (inside bars) for at least 30 minutes</li>
+                        <li><strong>Break of Structure</strong> - Clear break of recent high/low with closing candle confirmation</li>
+                    </ol>
+                    <h3>Confirmation Filters:</h3>
+                    <ul>
+                        <li>Price must be above/below the 20-period moving average (depending on trend direction)</li>
+                        <li>No major economic news within 15 minutes of potential entry</li>
+                        <li>Spread must be less than 3 pips for forex, less than 50 cents for gold</li>
+                    </ul>
+                    <p class="motivational-quote">
+                        "I missed hundreds of trades waiting for perfect setups, but the ones I took made all the difference."
+                    </p>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-3"></div>
+                    <script>
+                        // Chart 3: Entry Criteria Example
+                        const dates3 = ["09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45"];
+                        const open3 = [1810, 1812, 1811, 1813, 1812, 1813, 1815, 1818, 1820, 1825];
+                        const high3 = [1812, 1813, 1813, 1815, 1814, 1815, 1820, 1822, 1825, 1830];
+                        const low3 = [1808, 1810, 1810, 1812, 1811, 1812, 1813, 1815, 1818, 1822];
+                        const close3 = [1812, 1811, 1813, 1812, 1813, 1815, 1818, 1820, 1825, 1828];
+                        const volume3 = [800, 750, 700, 650, 600, 1800, 2000, 2200, 2500, 3000];
+
+                        // Add moving average data
+                        const ma20 = [1810, 1810.5, 1811, 1811.5, 1812, 1812.5, 1813, 1814, 1815, 1817];
+
+                        const candlestick3 = {
+                            x: dates3,
+                            open: open3,
+                            high: high3,
+                            low: low3,
+                            close: close3,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "Gold Price",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const maTrace = {
+                            x: dates3,
+                            y: ma20,
+                            type: "scatter",
+                            mode: "lines",
+                            line: { color: "#00e5ff", width: 2 },
+                            name: "20 MA",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors3 = close3.map((c, i) => (c >= open3[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars3 = {
+                            x: dates3,
+                            y: volume3,
+                            type: "bar",
+                            marker: { color: barColors3 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        const layout3 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                            shapes: [{
+                                type: "rect",
+                                xref: "x",
+                                yref: "paper",
+                                x0: "09:25",
+                                y0: 0,
+                                x1: "09:45",
+                                y1: 1,
+                                fillcolor: "rgba(255, 45, 117, 0.1)",
+                                line: { width: 0 }
+                            }],
+                            annotations: [{
+                                x: "09:35",
+                                y: 0.9,
+                                xref: "x",
+                                yref: "paper",
+                                text: "Volume Spike + Breakout",
+                                showarrow: true,
+                                arrowhead: 1,
+                                ax: 0,
+                                ay: -40,
+                                bgcolor: "rgba(255, 45, 117, 0.7)"
+                            }]
+                        };
+
+                        Plotly.newPlot("chart-3", [candlestick3, maTrace, volumeBars3], layout3);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="2">Previous</button>
+                    <button class="nav-btn next-btn" data-next="4">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="strategy-page" id="page-4" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-hand-holding-usd"></i> Position Sizing & Risk Management</h2>
+                <div class="page-content">
+                    <p>Proper risk management is what separates successful traders from gamblers. Here's the exact approach I used to grow my account consistently.</p>
+                    <h3>Risk Per Trade:</h3>
+                    <ul>
+                        <li>Never risk more than 1-2% of your account on a single trade</li>
+                        <li>For a $5,000 account, this means $50-$100 maximum risk per trade</li>
+                        <li>Calculate position size based on stop loss distance</li>
+                    </ul>
+                    <h3>Position Size Formula:</h3>
+                    <p>Position Size = (Account Risk in $) / (Stop Loss in Pips × Pip Value)</p>
+                    <p><strong>Example:</strong> $5,000 account risking 1% ($50) with 20 pip stop loss on EUR/USD (pip value = $10 per lot)</p>
+                    <p>Position Size = $50 / (20 × $10) = 0.25 lots</p>
+                    <h3>Stop Loss Placement:</h3>
+                    <ul>
+                        <li>Gold: 30-50 cents (3-5 pips) beyond recent swing high/low</li>
+                        <li>Forex: 15-25 pips beyond recent swing high/low</li>
+                        <li>Never move stop loss further away to "give the trade room"</li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-4"></div>
+                    <script>
+                        // Chart 4: Risk Management Example
+                        const dates4 = ["10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45"];
+                        const open4 = [1.0850, 1.0855, 1.0860, 1.0858, 1.0865, 1.0870, 1.0875, 1.0880];
+                        const high4 = [1.0858, 1.0862, 1.0865, 1.0865, 1.0872, 1.0878, 1.0882, 1.0885];
+                        const low4 = [1.0845, 1.0850, 1.0855, 1.0852, 1.0860, 1.0865, 1.0870, 1.0875];
+                        const close4 = [1.0855, 1.0860, 1.0858, 1.0865, 1.0870, 1.0875, 1.0880, 1.0882];
+                        const volume4 = [1500, 1800, 2000, 2200, 2500, 2800, 3000, 3200];
+
+                        const candlestick4 = {
+                            x: dates4,
+                            open: open4,
+                            high: high4,
+                            low: low4,
+                            close: close4,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "EUR/USD",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors4 = close4.map((c, i) => (c >= open4[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars4 = {
+                            x: dates4,
+                            y: volume4,
+                            type: "bar",
+                            marker: { color: barColors4 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        const layout4 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                            shapes: [
+                                {
+                                    type: "line",
+                                    x0: "10:30",
+                                    y0: 1.0852,
+                                    x1: "11:45",
+                                    y1: 1.0852,
+                                    line: { color: "#DC2626", width: 2, dash: "dot" },
+                                    name: "Stop Loss"
+                                },
+                                {
+                                    type: "line",
+                                    x0: "10:30",
+                                    y0: 1.0878,
+                                    x1: "11:45",
+                                    y1: 1.0878,
+                                    line: { color: "#16A34A", width: 2, dash: "dot" },
+                                    name: "Take Profit"
+                                },
+                                {
+                                    type: "rect",
+                                    xref: "x",
+                                    yref: "y",
+                                    x0: "10:30",
+                                    y0: 1.0852,
+                                    x1: "10:45",
+                                    y1: 1.0858,
+                                    fillcolor: "rgba(255, 45, 117, 0.2)",
+                                    line: { width: 0 }
+                                }
+                            ],
+                            annotations: [
+                                {
+                                    x: "11:00",
+                                    y: 1.0852,
+                                    text: "Stop Loss (25 pips)",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -30,
+                                    bgcolor: "rgba(220, 38, 38, 0.7)"
+                                },
+                                {
+                                    x: "11:00",
+                                    y: 1.0878,
+                                    text: "Take Profit (50 pips)",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: 30,
+                                    bgcolor: "rgba(22, 163, 74, 0.7)"
+                                }
+                            ]
+                        };
+
+                        Plotly.newPlot("chart-4", [candlestick4, volumeBars4], layout4);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="3">Previous</button>
+                    <button class="nav-btn next-btn" data-next="5">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 5 -->
+            <div class="strategy-page" id="page-5" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-trophy"></i> Take Profit Strategies</h2>
+                <div class="page-content">
+                    <p>The Beast Strategy uses a tiered take profit approach to maximize gains while securing profits along the way.</p>
+                    <h3>Three-Tier Profit Taking:</h3>
+                    <ol>
+                        <li><strong>First Target (25% of position):</strong> 1:1 risk-reward (e.g., 20 pips if SL is 20 pips)</li>
+                        <li><strong>Second Target (50% of position):</strong> 2:1 risk-reward (e.g., 40 pips)</li>
+                        <li><strong>Third Target (25% of position):</strong> Let run with trailing stop (minimum 3:1)</li>
+                    </ol>
+                    <h3>Trailing Stop Technique:</h3>
+                    <ul>
+                        <li>After hitting second target, move stop to breakeven</li>
+                        <li>Trail stop at 50% of recent candle range</li>
+                        <li>For gold, trail by $1 (10 pips) for every $5 (50 pips) move</li>
+                        <li>For forex, trail by 10 pips for every 30 pip move</li>
+                    </ul>
+                    <h3>Special Cases:</h3>
+                    <ul>
+                        <li>During news events, take full profit at 2:1 and exit</li>
+                        <li>If price stalls at round numbers (e.g., 1800 in gold), take partial profit</li>
+                        <li>Friday afternoons - close all positions before market close</li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-5"></div>
+                    <script>
+                        // Chart 5: Take Profit Example
+                        const dates5 = ["13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00"];
+                        const open5 = [1820, 1825, 1830, 1835, 1840, 1845, 1850, 1855, 1860];
+                        const high5 = [1828, 1832, 1838, 1842, 1848, 1852, 1858, 1862, 1868];
+                        const low5 = [1818, 1822, 1825, 1830, 1835, 1840, 1845, 1850, 1855];
+                        const close5 = [1825, 1830, 1835, 1840, 1845, 1850, 1855, 1860, 1865];
+                        const volume5 = [3000, 3200, 3500, 3800, 4000, 4200, 4500, 4800, 5000];
+
+                        const candlestick5 = {
+                            x: dates5,
+                            open: open5,
+                            high: high5,
+                            low: low5,
+                            close: close5,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "Gold Price",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors5 = close5.map((c, i) => (c >= open5[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars5 = {
+                            x: dates5,
+                            y: volume5,
+                            type: "bar",
+                            marker: { color: barColors5 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        // Trailing stop levels
+                        const trailingStops = [1820, 1825, 1830, 1835, 1840, 1845, 1850, 1855, 1860];
+
+                        const trailingStopTrace = {
+                            x: dates5,
+                            y: trailingStops,
+                            type: "scatter",
+                            mode: "lines",
+                            line: { color: "#FF9800", width: 2, dash: "dot" },
+                            name: "Trailing Stop",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const layout5 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                            shapes: [
+                                {
+                                    type: "line",
+                                    x0: "13:00",
+                                    y0: 1835,
+                                    x1: "13:45",
+                                    y1: 1835,
+                                    line: { color: "#16A34A", width: 2, dash: "dot" },
+                                    name: "TP1 (1:1)"
+                                },
+                                {
+                                    type: "line",
+                                    x0: "13:00",
+                                    y0: 1850,
+                                    x1: "14:30",
+                                    y1: 1850,
+                                    line: { color: "#16A34A", width: 2, dash: "dot" },
+                                    name: "TP2 (2:1)"
+                                }
+                            ],
+                            annotations: [
+                                {
+                                    x: "13:30",
+                                    y: 1835,
+                                    text: "TP1 - 25% @ 1:1",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -30,
+                                    bgcolor: "rgba(22, 163, 74, 0.7)"
+                                },
+                                {
+                                    x: "14:00",
+                                    y: 1850,
+                                    text: "TP2 - 50% @ 2:1",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -30,
+                                    bgcolor: "rgba(22, 163, 74, 0.7)"
+                                },
+                                {
+                                    x: "15:00",
+                                    y: 1860,
+                                    text: "Trailing Stop",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -30,
+                                    bgcolor: "rgba(255, 152, 0, 0.7)"
+                                }
+                            ]
+                        };
+
+                        Plotly.newPlot("chart-5", [candlestick5, trailingStopTrace, volumeBars5], layout5);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="4">Previous</button>
+                    <button class="nav-btn next-btn" data-next="6">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 6 -->
+            <div class="strategy-page" id="page-6" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-exclamation-triangle"></i> Common Mistakes to Avoid</h2>
+                <div class="page-content">
+                    <p>After coaching hundreds of traders, these are the most common mistakes that prevent success with this strategy.</p>
+                    <h3>Psychological Errors:</h3>
+                    <ul>
+                        <li><strong>Overtrading:</strong> Taking setups that don't meet all criteria because of FOMO</li>
+                        <li><strong>Revenge Trading:</strong> Trying to immediately recover losses with bigger positions</li>
+                        <li><strong>Moving Stops:</strong> Widening stop loss when trade goes against you</li>
+                    </ul>
+                    <h3>Technical Errors:</h3>
+                    <ul>
+                        <li>Trading during low liquidity periods (Asian session)</li>
+                        <li>Ignoring volume spikes that contradict your bias</li>
+                        <li>Entering before full candle closes beyond structure</li>
+                        <li>Using too many indicators (this strategy needs none)</li>
+                    </ul>
+                    <h3>Risk Management Errors:</h3>
+                    <ul>
+                        <li>Increasing position size after losses ("martingale")</li>
+                        <li>Not adjusting position size for different instruments</li>
+                        <li>Taking trades with poor risk-reward (less than 1:1)</li>
+                    </ul>
+                    <p class="motivational-quote">
+                        "I lost $364 of my $400 account making these exact mistakes. Learn from my losses so you don't repeat them."
+                    </p>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-6"></div>
+                    <script>
+                        // Chart 6: Common Mistakes Example
+                        const dates6 = ["08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45"];
+                        const open6 = [1.0900, 1.0905, 1.0910, 1.0915, 1.0920, 1.0925, 1.0930, 1.0935];
+                        const high6 = [1.0910, 1.0915, 1.0920, 1.0925, 1.0930, 1.0935, 1.0940, 1.0945];
+                        const low6 = [1.0895, 1.0900, 1.0905, 1.0910, 1.0915, 1.0920, 1.0925, 1.0930];
+                        const close6 = [1.0905, 1.0910, 1.0915, 1.0920, 1.0925, 1.0930, 1.0935, 1.0940];
+                        const volume6 = [800, 750, 700, 650, 600, 550, 500, 450];
+
+                        const candlestick6 = {
+                            x: dates6,
+                            open: open6,
+                            high: high6,
+                            low: low6,
+                            close: close6,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "EUR/USD",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors6 = close6.map((c, i) => (c >= open6[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars6 = {
+                            x: dates6,
+                            y: volume6,
+                            type: "bar",
+                            marker: { color: barColors6 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        // Add some indicators to show clutter
+                        const rsi = [70, 72, 75, 78, 80, 82, 85, 88];
+                        const macd = [0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 1.9];
+                        const stoch = [85, 87, 89, 90, 92, 94, 96, 98];
+
+                        const rsiTrace = {
+                            x: dates6,
+                            y: rsi,
+                            type: "scatter",
+                            mode: "lines",
+                            line: { color: "#FF9800", width: 1 },
+                            name: "RSI (Overbought)",
+                            xaxis: "x",
+                            yaxis: "y3",
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                        };
+
+                        const layout6 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                            shapes: [
+                                {
+                                    type: "rect",
+                                    xref: "x",
+                                    yref: "paper",
+                                    x0: "08:00",
+                                    y0: 0,
+                                    x1: "09:45",
+                                    y1: 1,
+                                    fillcolor: "rgba(255, 152, 0, 0.1)",
+                                    line: { width: 0 }
+                                }
+                            ],
+                            annotations: [
+                                {
+                                    x: "08:45",
+                                    y: 0.9,
+                                    xref: "x",
+                                    yref: "paper",
+                                    text: "Low Volume + Overbought",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -40,
+                                    bgcolor: "rgba(255, 152, 0, 0.7)"
+                                },
+                                {
+                                    x: "08:45",
+                                    y: 0.8,
+                                    xref: "x",
+                                    yref: "paper",
+                                    text: "Poor Trading Conditions",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -30,
+                                    bgcolor: "rgba(255, 152, 0, 0.7)"
+                                }
+                            ]
+                        };
+
+                        Plotly.newPlot("chart-6", [candlestick6, volumeBars6], layout6);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="5">Previous</button>
+                    <button class="nav-btn next-btn" data-next="7">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 7 -->
+            <div class="strategy-page" id="page-7" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-chart-area"></i> Advanced Chart Patterns</h2>
+                <div class="page-content">
+                    <p>These specialized patterns increase win rate when they appear with our standard entry criteria.</p>
+                    <h3>1. The Beast Squeeze:</h3>
+                    <ul>
+                        <li>Occurs after 3+ consecutive inside bars (narrow range candles)</li>
+                        <li>Volume drops below average during squeeze</li>
+                        <li>Breakout with 3x volume confirms direction</li>
+                        <li>87% win rate when all conditions met</li>
+                    </ul>
+                    <h3>2. London Spike:</h3>
+                    <ul>
+                        <li>First 15 minutes of London session</li>
+                        <li>Large candle (10+ pips) with high volume</li>
+                        <li>Retracement of 30-50% of spike</li>
+                        <li>Entry on continuation in original direction</li>
+                        <li>92% win rate on gold with this setup</li>
+                    </ul>
+                    <h3>3. New York Trap:</h3>
+                    <ul>
+                        <li>False breakout at NY open (1:00 PM GMT)</li>
+                        <li>Quick reversal through pre-open high/low</li>
+                        <li>Volume confirms reversal is stronger than initial move</li>
+                        <li>Entry on close beyond pre-open range</li>
+                        <li>94% win rate when all conditions align</li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-7"></div>
+                    <script>
+                        // Chart 7: Advanced Patterns Example
+                        const dates7 = ["07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45"];
+                        const open7 = [1810, 1815, 1820, 1818, 1815, 1825, 1830, 1825, 1835];
+                        const high7 = [1815, 1820, 1822, 1820, 1825, 1835, 1840, 1835, 1845];
+                        const low7 = [1805, 1810, 1815, 1815, 1810, 1820, 1825, 1820, 1830];
+                        const close7 = [1815, 1820, 1818, 1815, 1825, 1830, 1825, 1835, 1840];
+                        const volume7 = [800, 2500, 1800, 1500, 3000, 3500, 2800, 4000, 4500];
+
+                        const candlestick7 = {
+                            x: dates7,
+                            open: open7,
+                            high: high7,
+                            low: low7,
+                            close: close7,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "Gold Price",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors7 = close7.map((c, i) => (c >= open7[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars7 = {
+                            x: dates7,
+                            y: volume7,
+                            type: "bar",
+                            marker: { color: barColors7 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        const layout7 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                            shapes: [
+                                {
+                                    type: "rect",
+                                    xref: "x",
+                                    yref: "paper",
+                                    x0: "08:00",
+                                    y0: 0,
+                                    x1: "08:45",
+                                    y1: 1,
+                                    fillcolor: "rgba(255, 45, 117, 0.1)",
+                                    line: { width: 0 }
+                                },
+                                {
+                                    type: "line",
+                                    x0: "08:00",
+                                    y0: 1820,
+                                    x1: "08:45",
+                                    y1: 1820,
+                                    line: { color: "#00e5ff", width: 1, dash: "dot" }
+                                },
+                                {
+                                    type: "line",
+                                    x0: "08:00",
+                                    y0: 1815,
+                                    x1: "08:45",
+                                    y1: 1815,
+                                    line: { color: "#00e5ff", width: 1, dash: "dot" }
+                                }
+                            ],
+                            annotations: [
+                                {
+                                    x: "08:15",
+                                    y: 0.9,
+                                    xref: "x",
+                                    yref: "paper",
+                                    text: "Beast Squeeze Pattern",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -40,
+                                    bgcolor: "rgba(255, 45, 117, 0.7)"
+                                },
+                                {
+                                    x: "08:45",
+                                    y: 0.8,
+                                    xref: "x",
+                                    yref: "paper",
+                                    text: "Breakout with Volume Spike",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -30,
+                                    bgcolor: "rgba(255, 45, 117, 0.7)"
+                                }
+                            ]
+                        };
+
+                        Plotly.newPlot("chart-7", [candlestick7, volumeBars7], layout7);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="6">Previous</button>
+                    <button class="nav-btn next-btn" data-next="8">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 8 -->
+            <div class="strategy-page" id="page-8" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-calendar-alt"></i> Economic News Adaptation</h2>
+                <div class="page-content">
+                    <p>Economic news creates volatility that can be exploited with proper techniques.</p>
+                    <h3>News Trading Rules:</h3>
+                    <ul>
+                        <li><strong>Pre-News:</strong> Close all positions 5 minutes before high-impact news</li>
+                        <li><strong>Initial Spike:</strong> Never chase - wait for retracement</li>
+                        <li><strong>Retracement Entry:</strong> Must be 50-61.8% of initial move with volume confirmation</li>
+                        <li><strong>News Scalping:</strong> Only on 1-minute chart with tight stops (5-10 pips)</li>
+                    </ul>
+                    <h3>Highest Probability News Events:</h3>
+                    <ol>
+                        <li>Non-Farm Payrolls (NFP)</li>
+                        <li>FOMC Rate Decisions</li>
+                        <li>CPI Data Releases</li>
+                        <li>ECB Press Conferences</li>
+                    </ol>
+                    <h3>News Filter Settings:</h3>
+                    <ul>
+                        <li>Use economic calendar with impact filter (high only)</li>
+                        <li>Set alerts 15 minutes before events</li>
+                        <li>Mark previous day's high/low - often act as magnets post-news</li>
+                    </ul>
+                    <p class="motivational-quote">
+                        "I made $1,200 in 8 minutes during NFP once - but lost $800 the next month by being careless with news trades."
+                    </p>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-8"></div>
+                    <script>
+                        // Chart 8: News Trading Example
+                        const dates8 = ["12:55", "13:00", "13:01", "13:02", "13:03", "13:04", "13:05", "13:06", "13:07", "13:08", "13:09", "13:10"];
+                        const open8 = [1.0850, 1.0855, 1.0870, 1.0885, 1.0900, 1.0880, 1.0865, 1.0875, 1.0885, 1.0900, 1.0915, 1.0930];
+                        const high8 = [1.0855, 1.0870, 1.0885, 1.0905, 1.0910, 1.0885, 1.0870, 1.0880, 1.0890, 1.0910, 1.0925, 1.0940];
+                        const low8 = [1.0845, 1.0850, 1.0865, 1.0880, 1.0875, 1.0855, 1.0850, 1.0865, 1.0875, 1.0885, 1.0900, 1.0915];
+                        const close8 = [1.0855, 1.0870, 1.0885, 1.0900, 1.0880, 1.0865, 1.0875, 1.0885, 1.0900, 1.0915, 1.0930, 1.0925];
+                        const volume8 = [800, 5000, 4500, 4000, 3500, 3000, 2800, 3000, 3200, 3500, 3800, 4000];
+
+                        const candlestick8 = {
+                            x: dates8,
+                            open: open8,
+                            high: high8,
+                            low: low8,
+                            close: close8,
+                            increasing: { line: { color: "#16A34A" } },
+                            decreasing: { line: { color: "#DC2626" } },
+                            type: "candlestick",
+                            name: "EUR/USD",
+                            xaxis: "x",
+                            yaxis: "y1",
+                        };
+
+                        const barColors8 = close8.map((c, i) => (c >= open8[i] ? "#16A34A" : "#DC2626"));
+                        const volumeBars8 = {
+                            x: dates8,
+                            y: volume8,
+                            type: "bar",
+                            marker: { color: barColors8 },
+                            name: "Volume",
+                            xaxis: "x",
+                            yaxis: "y2",
+                        };
+
+                        const layout8 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1], rangeslider: { visible: false } },
+                            yaxis: { domain: [0.25, 1], title: "Price", gridcolor: "rgba(255, 255, 255, 0.1)" },
+                            yaxis2: { domain: [0, 0.20], title: "Volume", showgrid: false },
+                            shapes: [
+                                {
+                                    type: "line",
+                                    x0: "13:00",
+                                    y0: 1.0850,
+                                    x1: "13:00",
+                                    y1: 1.0910,
+                                    line: { color: "#00e5ff", width: 2 }
+                                },
+                                {
+                                    type: "line",
+                                    x0: "13:00",
+                                    y0: 1.0870,
+                                    x1: "13:10",
+                                    y1: 1.0870,
+                                    line: { color: "#FF9800", width: 1, dash: "dot" }
+                                },
+                                {
+                                    type: "line",
+                                    x0: "13:05",
+                                    y0: 1.0850,
+                                    x1: "13:05",
+                                    y1: 1.0910,
+                                    line: { color: "#9c27b0", width: 1, dash: "dot" }
+                                }
+                            ],
+                            annotations: [
+                                {
+                                    x: "13:00",
+                                    y: 1.0915,
+                                    text: "NFP News Release",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: -40,
+                                    bgcolor: "rgba(0, 229, 255, 0.7)"
+                                },
+                                {
+                                    x: "13:05",
+                                    y: 1.0855,
+                                    text: "Retracement Entry",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: 40,
+                                    bgcolor: "rgba(156, 39, 176, 0.7)"
+                                },
+                                {
+                                    x: "13:07",
+                                    y: 1.0885,
+                                    text: "50% Retracement",
+                                    showarrow: true,
+                                    arrowhead: 1,
+                                    ax: 0,
+                                    ay: 30,
+                                    bgcolor: "rgba(255, 152, 0, 0.7)"
+                                }
+                            ]
+                        };
+
+                        Plotly.newPlot("chart-8", [candlestick8, volumeBars8], layout8);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="7">Previous</button>
+                    <button class="nav-btn next-btn" data-next="9">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 9 -->
+            <div class="strategy-page" id="page-9" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-clock"></i> Real-Time Session Tracker</h2>
+                <div class="page-content">
+                    <p>This proprietary tool helps identify the best trading windows throughout the day.</p>
+                    <div class="session-tracker">
+                        <div class="session-indicator">
+                            <div class="session-time" id="current-time">00:00 GMT</div>
+                            <div class="session-status" id="session-status">Loading session data...</div>
+                        </div>
+                        <div class="session-progress">
+                            <div class="progress-bar" id="session-progress"></div>
+                        </div>
+                        <div class="session-details">
+                            <h3>Current Session Strength:</h3>
+                            <div class="strength-meter" id="strength-meter">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <p id="session-recommendation">Calculating best trading conditions...</p>
+                        </div>
+                    </div>
+                    <h3>Session-Specific Strategies:</h3>
+                    <ul>
+                        <li><strong>Asian Session (12AM-8AM GMT):</strong> Avoid trading unless exceptional setup</li>
+                        <li><strong>London Open (8AM GMT):</strong> Focus on gold breakouts</li>
+                        <li><strong>London Mid (10AM-12PM GMT):</strong> Look for continuation patterns</li>
+                        <li><strong>NY-London Overlap (1PM-4PM GMT):</strong> Highest probability setups</li>
+                        <li><strong>NY Close (8PM GMT):</strong> Prepare for next day</li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-9"></div>
+                    <script>
+                        // Chart 9: Session Tracker Example
+                        const hours = ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "00:00"];
+                        const volatility = [20, 25, 80, 100, 70, 30, 20];
+                        const volume = [500, 600, 2500, 3000, 2000, 800, 500];
+                        
+                        const volatilityTrace = {
+                            x: hours,
+                            y: volatility,
+                            type: "scatter",
+                            mode: "lines+markers",
+                            line: { color: "#ff2d75", width: 3 },
+                            marker: { size: 8 },
+                            name: "Volatility Index",
+                            yaxis: "y1"
+                        };
+                        
+                        const volumeTrace = {
+                            x: hours,
+                            y: volume,
+                            type: "bar",
+                            marker: { color: "#9c27b0" },
+                            name: "Average Volume",
+                            yaxis: "y2"
+                        };
+                        
+                        const layout9 = {
+                            height: 400,
+                            paper_bgcolor: "rgba(0, 0, 0, 0)",
+                            plot_bgcolor: "rgba(0, 0, 0, 0)",
+                            font: { color: "#f0f0f0" },
+                            margin: { t: 10, r: 10, b: 30, l: 40 },
+                            xaxis: { domain: [0, 1] },
+                            yaxis: { 
+                                title: "Volatility Index", 
+                                range: [0, 120],
+                                gridcolor: "rgba(255, 255, 255, 0.1)"
+                            },
+                            yaxis2: {
+                                title: "Volume",
+                                overlaying: "y",
+                                side: "right",
+                                gridcolor: "rgba(255, 255, 255, 0.1)"
+                            },
+                            shapes: [
+                                {
+                                    type: "rect",
+                                    xref: "x",
+                                    yref: "paper",
+                                    x0: "00:00",
+                                    y0: 0,
+                                    x1: "08:00",
+                                    y1: 1,
+                                    fillcolor: "rgba(255, 152, 0, 0.1)",
+                                    line: { width: 0 }
+                                },
+                                {
+                                    type: "rect",
+                                    xref: "x",
+                                    yref: "paper",
+                                    x0: "08:00",
+                                    y0: 0,
+                                    x1: "16:00",
+                                    y1: 1,
+                                    fillcolor: "rgba(76, 175, 80, 0.1)",
+                                    line: { width: 0 }
+                                },
+                                {
+                                    type: "rect",
+                                    xref: "x",
+                                    yref: "paper",
+                                    x0: "12:00",
+                                    y0: 0,
+                                    x1: "16:00",
+                                    y1: 1,
+                                    fillcolor: "rgba(255, 45, 117, 0.1)",
+                                    line: { width: 0 }
+                                }
+                            ],
+                            annotations: [
+                                {
+                                    x: "04:00",
+                                    y: 110,
+                                    text: "Asian Session<br>(Low Volatility)",
+                                    showarrow: false,
+                                    bgcolor: "rgba(255, 152, 0, 0.7)"
+                                },
+                                {
+                                    x: "10:00",
+                                    y: 110,
+                                    text: "London Session<br>(High Volatility)",
+                                    showarrow: false,
+                                    bgcolor: "rgba(76, 175, 80, 0.7)"
+                                },
+                                {
+                                    x: "14:00",
+                                    y: 110,
+                                    text: "Overlap Session<br>(Best Trading)",
+                                    showarrow: false,
+                                    bgcolor: "rgba(255, 45, 117, 0.7)"
+                                }
+                            ]
+                        };
+                        
+                        Plotly.newPlot("chart-9", [volatilityTrace, volumeTrace], layout9);
+                    </script>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="8">Previous</button>
+                    <button class="nav-btn next-btn" data-next="10">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 10 -->
+            <div class="strategy-page" id="page-10" style="display: none;">
+                <h2 class="page-title"><i class="fas fa-graduation-cap"></i> Final Thoughts & Next Steps</h2>
+                <div class="page-content">
+                    <p>Congratulations on completing the Beast Strategy guide. Here's how to proceed:</p>
+                    <h3>Implementation Plan:</h3>
+                    <ol>
+                        <li><strong>Demo Trading:</strong> Practice for 2 weeks minimum - no exceptions</li>
+                        <li><strong>Journal Every Trade:</strong> Record setups, outcomes, and emotions</li>
+                        <li><strong>Start Small:</strong> Begin with 0.01 lots when going live</li>
+                        <li><strong>Scale Gradually:</strong> Only increase size after 3 consecutive winning weeks</li>
+                    </ol>
+                    <h3>Recommended Resources:</h3>
+                    <ul>
+                        <li>Economic Calendar: forexfactory.com</li>
+                        <li>Volume Indicator: Better Volume (free MT4 version)</li>
+                        <li>Charting Platform: TradingView or MetaTrader 5</li>
+                        <li>Broker Selection: Look for tight spreads and fast execution</li>
+                    </ul>
+                    <p class="motivational-quote">
+                        "From $36 to consistent profits - if I can do it, so can you. Trust the process, maintain discipline, and the results will come."
+                    </p>
+                    <div class="vote-container">
+                        <button class="vote-btn like"><i class="fas fa-thumbs-up"></i> This strategy helped me</button>
+                        <button class="vote-btn dislike"><i class="fas fa-thumbs-down"></i> I need more help</button>
+                    </div>
+                </div>
+                <div class="page-navigation">
+                    <button class="nav-btn prev-btn" data-prev="9">Previous</button>
+                    <button class="nav-btn" disabled>Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Settings Modal -->
+    <div class="modal" id="theme-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Theme Settings</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Select Theme</label>
+                    <div class="theme-selector" id="theme-selector">
+                        <!-- Themes will be added here -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bg-color">Background Color</label>
+                    <input type="color" id="bg-color" class="form-control" value="#121212">
+                </div>
+                <div class="form-group">
+                    <label for="text-color">Text Color</label>
+                    <input type="color" id="text-color" class="form-control" value="#f0f0f0">
+                </div>
+                <div class="form-group">
+                    <label for="primary-color">Primary Color</label>
+                    <input type="color" id="primary-color" class="form-control" value="#ff2d75">
+                </div>
+                <div class="form-group">
+                    <label for="secondary-color">Secondary Color</label>
+                    <input type="color" id="secondary-color" class="form-control" value="#9c27b0">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="save-theme">Save Changes</button>
+                <button class="btn btn-primary close-modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal" id="add-user-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New User</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="new-username">Username</label>
+                    <input type="text" id="new-username" class="form-control" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="new-password">Password</label>
+                    <input type="password" id="new-password" class="form-control" placeholder="Enter password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="Confirm password">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="save-user">Save User</button>
+                <button class="btn btn-primary close-modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgot-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Forgot Password</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Please contact support to reset your password:</p>
+                <div class="social-login" style="justify-content: center; margin: 1rem 0;">
+                    <a href="https://www.instagram.com/tking_beast?igsh=dmpqdmR5dzlkbTN1" target="_blank" class="social-btn instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://t.me/Eastplans" target="_blank" class="social-btn telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+                <p>Send us a direct message with your username and we'll assist you.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close-modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="modal" id="terms-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Terms of Service</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Last Updated: January 2025</strong></p>
+                <p>By accessing this website and using the TKINGBEAST strategy, you agree to these terms:</p>
+                <ol>
+                    <li>This strategy is for educational purposes only.</li>
+                    <li>Past performance is not indicative of future results.</li>
+                    <li>You are solely responsible for your trading decisions.</li>
+                    <li>Sharing or distributing this material is strictly prohibited.</li>
+                    <li>Access is limited to one device per user account.</li>
+                    <li>We reserve the right to terminate access for any violation.</li>
+                </ol>
+                <p>Violations may result in immediate account suspension without refund.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close-modal">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div class="modal" id="privacy-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Privacy Policy</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Last Updated: January 2025</strong></p>
+                <p>Your privacy is important to us. This policy explains what data we collect and how we use it:</p>
+                <h3>Information We Collect:</h3>
+                <ul>
+                    <li>Username and encrypted password</li>
+                    <li>Device information for security purposes</li>
+                    <li>Login times and durations</li>
+                    <li>Feedback votes (anonymous)</li>
+                </ul>
+                <h3>How We Use Information:</h3>
+                <ul>
+                    <li>To provide and maintain our service</li>
+                    <li>To prevent unauthorized access</li>
+                    <li>To improve user experience</li>
+                    <li>To communicate with users when necessary</li>
+                </ul>
+                <p>We never sell your data or share it with third parties for marketing purposes.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close-modal">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Warning Modal -->
+    <div class="modal" id="warning-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Security Warning</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="warning-message">Unauthorized access attempt detected.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close-modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="welcome-sound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3" preload="auto"></audio>
+    <audio id="warning-sound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3" preload="auto"></audio>
+    <audio id="error-sound" src="https://www.soundjay.com/buttons/sounds/button-08.mp3" preload="auto"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Global Variables
+        let currentUser = null;
+        let loginAttempts = 0;
+        let isAdmin = false;
+        let currentPage = 1;
+        let bannedDevices = JSON.parse(localStorage.getItem('bannedDevices')) || [];
+        let activeUsers = JSON.parse(localStorage.getItem('activeUsers')) || {};
+        let userFeedback = JSON.parse(localStorage.getItem('userFeedback')) || { likes: [], dislikes: [] };
+        let securityLogs = JSON.parse(localStorage.getItem('securityLogs')) || [];
+        let themes = [
+            { name: "Blood Red", bg: "#121212", text: "#ffffff", primary: "#ff0000", secondary: "#8b0000" },
+            { name: "Royal Purple", bg: "#121212", text: "#ffffff", primary: "#9c27b0", secondary: "#6a1b9a" },
+            { name: "Neon Blue", bg: "#121212", text: "#ffffff", primary: "#00e5ff", secondary: "#0088cc" },
+            { name: "Emerald", bg: "#121212", text: "#ffffff", primary: "#00c853", secondary: "#1b5e20" },
+            { name: "Gold", bg: "#121212", text: "#ffffff", primary: "#ffd700", secondary: "#b8860b" },
+            { name: "Dark Orange", bg: "#121212", text: "#ffffff", primary: "#ff5722", secondary: "#e64a19" },
+            { name: "Pink", bg: "#121212", text: "#ffffff", primary: "#e91e63", secondary: "#ad1457" },
+            { name: "Deep Ocean", bg: "#121212", text: "#ffffff", primary: "#2196f3", secondary: "#0d47a1" },
+            { name: "Lime", bg: "#121212", text: "#000000", primary: "#cddc39", secondary: "#827717" },
+            { name: "Amber", bg: "#121212", text: "#ffffff", primary: "#ffc107", secondary: "#ff8f00" },
+            { name: "Teal", bg: "#121212", text: "#ffffff", primary: "#009688", secondary: "#004d40" },
+            { name: "Indigo", bg: "#121212", text: "#ffffff", primary: "#3f51b5", secondary: "#1a237e" },
+            { name: "Deep Purple", bg: "#121212", text: "#ffffff", primary: "#673ab7", secondary: "#311b92" },
+            { name: "Cyan", bg: "#121212", text: "#ffffff", primary: "#00bcd4", secondary: "#006064" },
+            { name: "Light Green", bg: "#121212", text: "#ffffff", primary: "#8bc34a", secondary: "#33691e" },
+            { name: "Deep Orange", bg: "#121212", text: "#ffffff", primary: "#ff7043", secondary: "#bf360c" },
+            { name: "Blue Grey", bg: "#121212", text: "#ffffff", primary: "#607d8b", secondary: "#263238" },
+            { name: "Brown", bg: "#121212", text: "#ffffff", primary: "#795548", secondary: "#3e2723" },
+            { name: "Grey", bg: "#121212", text: "#ffffff", primary: "#9e9e9e", secondary: "#212121" },
+            { name: "Black & White", bg: "#000000", text: "#ffffff", primary: "#ffffff", secondary: "#9e9e9e" }
+        ];
+
+        // Users Database
+        let users = {
+            "TKING": {
+                password: "BEASTT168@",
+                isAdmin: true,
+                themePref: { bg: "#121212", text: "#f0f0f0", primary: "#ff2d75", secondary: "#9c27b0" }
+            }
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved users from localStorage
+            const savedUsers = JSON.parse(localStorage.getItem('users'));
+            if (savedUsers) {
+                users = { ...users, ...savedUsers };
+            }
+
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#ff2d75" },
+                    "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+                    "opacity": { "value": 0.5, "random": true },
+                    "size": { "value": 3, "random": true },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#9c27b0", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": { "enable": true, "mode": "repulse" },
+                        "onclick": { "enable": true, "mode": "push" }
+                    }
+                }
+            });
+
+            // Check if device is banned
+            const deviceId = generateDeviceId();
+            if (bannedDevices.includes(deviceId)) {
+                showWarning("This device is banned. Please contact support.", true);
+                document.getElementById('login-form').style.display = 'none';
+                return;
+            }
+
+            // Event Listeners
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('forgot-password').addEventListener('click', showForgotPassword);
+            document.getElementById('terms-link').addEventListener('click', showTerms);
+            document.getElementById('privacy-link').addEventListener('click', showPrivacy);
+            document.getElementById('register-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = "https://rb.gy/kbq8cp";
+            });
+            document.getElementById('logout-admin-btn').addEventListener('click', logout);
+            document.getElementById('logout-user-btn').addEventListener('click', logout);
+            document.getElementById('theme-admin-btn').addEventListener('click', showThemeModal);
+            document.getElementById('add-user-btn').addEventListener('click', showAddUserModal);
+            document.getElementById('save-user').addEventListener('click', saveNewUser);
+            document.getElementById('save-theme').addEventListener('click', saveTheme);
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+
+            // Navigation buttons
+            document.querySelectorAll('.next-btn').forEach(btn => {
+                btn.addEventListener('click', navigatePage);
+            });
+            document.querySelectorAll('.prev-btn').forEach(btn => {
+                btn.addEventListener('click', navigatePage);
+            });
+
+            // Vote buttons
+            document.querySelector('.vote-btn.like').addEventListener('click', () => submitVote('like'));
+            document.querySelector('.vote-btn.dislike').addEventListener('click', () => submitVote('dislike'));
+
+            // Initialize theme selector
+            initThemeSelector();
+
+            // Custom cursor effect
+            initCustomCursor();
+
+            // Session tracker
+            updateSessionTracker();
+            setInterval(updateSessionTracker, 60000);
+
+            // Copy protection
+            document.addEventListener('copy', preventCopy);
+            document.addEventListener('cut', preventCopy);
+            document.addEventListener('contextmenu', preventRightClick);
+            document.addEventListener('keydown', preventScreenCapture);
+
+            // Check if user is already logged in
+            checkRememberedUser();
+        });
+
+        // Generate device ID based on browser fingerprint
+        function generateDeviceId() {
+            const navigatorKeys = ['userAgent', 'platform', 'hardwareConcurrency', 'deviceMemory'];
+            let fingerprint = navigatorKeys.map(key => navigator[key]).join('');
+            return btoa(fingerprint).substring(0, 32);
+        }
+
+        // Handle login form submission
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            const termsAgreed = document.getElementById('terms').checked;
+            const deviceId = generateDeviceId();
+
+            // Check if terms are agreed
+            if (!termsAgreed) {
+                showWarning("You must agree to the Terms and Privacy Policy to login", true);
+                return;
+            }
+
+            // Check if device is banned
+            if (bannedDevices.includes(deviceId)) {
+                showWarning("This device is banned. Please contact support.", true);
+                return;
+            }
+
+            // Validate credentials
+            if (!users[username] || users[username].password !== password) {
+                loginAttempts++;
+                if (loginAttempts >= 6) {
+                    banDevice(deviceId);
+                    showWarning("Too many failed attempts. This device has been banned.", true);
+                    logSecurityEvent(`Device banned after 6 failed login attempts - Device: ${deviceId}`);
+                    return;
+                } else if (loginAttempts >= 3) {
+                    showWarning(`Invalid credentials. Attempt ${loginAttempts} of 6. After 6 attempts, your device will be banned.`, true);
+                    logSecurityEvent(`Failed login attempt ${loginAttempts} for username: ${username} - Device: ${deviceId}`);
+                } else {
+                    showWarning("Invalid username or password", true);
+                    logSecurityEvent(`Failed login attempt for username: ${username} - Device: ${deviceId}`);
+                }
+                return;
+            }
+
+            // Check if user is already logged in on another device
+            if (activeUsers[username] && activeUsers[username] !== deviceId) {
+                showWarning("This user is already logged in on another device. Please register a new account if you need access.", true);
+                logSecurityEvent(`Duplicate login attempt for username: ${username} - Device: ${deviceId}`);
+                return;
+            }
+
+            // Successful login
+            currentUser = username;
+            isAdmin = users[username].isAdmin || false;
+            loginAttempts = 0;
+
+            // Store active user
+            activeUsers[username] = deviceId;
+            localStorage.setItem('activeUsers', JSON.stringify(activeUsers));
+
+            // Remember user if requested
+            if (remember) {
+                localStorage.setItem('rememberedUser', JSON.stringify({ username, password }));
+            } else {
+                localStorage.removeItem('rememberedUser');
+            }
+
+            // Apply user's theme preferences
+            if (users[username].themePref) {
+                applyTheme(users[username].themePref);
+            }
+
+            // Log security event
+            logSecurityEvent(`Successful login for username: ${username} - Device: ${deviceId}`);
+
+            // Show appropriate dashboard
+            showDashboard();
+
+            // Play welcome sound and show message
+            playWelcomeSound(username);
+        }
+
+        // Show admin or user dashboard
+        function showDashboard() {
+            document.getElementById('login-container').style.display = 'none';
+            
+            if (isAdmin) {
+                document.getElementById('admin-dashboard').style.display = 'block';
+                document.getElementById('user-dashboard').style.display = 'none';
+                updateAdminDashboard();
+            } else {
+                document.getElementById('admin-dashboard').style.display = 'none';
+                document.getElementById('user-dashboard').style.display = 'block';
+            }
+        }
+
+        // Update admin dashboard with current data
+        function updateAdminDashboard() {
+            // Update user table
+            const userTableBody = document.getElementById('user-table-body');
+            userTableBody.innerHTML = '';
+            
+            for (const [username, userData] of Object.entries(users)) {
+                const tr = document.createElement('tr');
+                
+                const status = activeUsers[username] ? 
+                    `<span class="badge badge-success">Active</span>` : 
+                    `<span class="badge badge-warning">Inactive</span>`;
+                
+                const actions = `
+                    <button class="action-btn edit" data-user="${username}"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn ban" data-user="${username}"><i class="fas fa-ban"></i></button>
+                    <button class="action-btn delete" data-user="${username}"><i class="fas fa-trash"></i></button>
+                `;
+                
+                tr.innerHTML = `
+                    <td>${username}</td>
+                    <td>${status}</td>
+                    <td>${activeUsers[username] ? 'Logged In' : 'Offline'}</td>
+                    <td>${new Date().toLocaleString()}</td>
+                    <td>${actions}</td>
+                `;
+                
+                userTableBody.appendChild(tr);
+            }
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.action-btn.edit').forEach(btn => {
+                btn.addEventListener('click', () => editUser(btn.dataset.user));
+            });
+            
+            document.querySelectorAll('.action-btn.ban').forEach(btn => {
+                btn.addEventListener('click', () => banUser(btn.dataset.user));
+            });
+            
+            document.querySelectorAll('.action-btn.delete').forEach(btn => {
+                btn.addEventListener('click', () => deleteUser(btn.dataset.user));
+            });
+            
+            // Update statistics
+            document.getElementById('total-users').textContent = Object.keys(users).length;
+            document.getElementById('active-users').textContent = Object.keys(activeUsers).length;
+            document.getElementById('banned-users').textContent = bannedDevices.length;
+            
+            // Update feedback
+            const positiveList = document.getElementById('positive-votes-list');
+            const negativeList = document.getElementById('negative-votes-list');
+            
+            positiveList.innerHTML = '';
+            negativeList.innerHTML = '';
+            
+            if (userFeedback.likes.length > 0) {
+                userFeedback.likes.forEach(username => {
+                    const div = document.createElement('div');
+                    div.textContent = username;
+                    positiveList.appendChild(div);
+                });
+            } else {
+                positiveList.textContent = 'No positive votes yet';
+            }
+            
+            if (userFeedback.dislikes.length > 0) {
+                userFeedback.dislikes.forEach(username => {
+                    const div = document.createElement('div');
+                    div.textContent = username;
+                    negativeList.appendChild(div);
+                });
+            } else {
+                negativeList.textContent = 'No negative votes yet';
+            }
+            
+            // Update security logs
+            const logsContainer = document.getElementById('security-logs');
+            logsContainer.innerHTML = '';
+            
+            securityLogs.slice().reverse().forEach(log => {
+                const logEntry = document.createElement('div');
+                logEntry.className = 'log-entry';
+                logEntry.innerHTML = `
+                    <span class="log-time">[${new Date(log.timestamp).toLocaleString()}]</span>
+                    <span class="log-event">${log.event}</span>
+                `;
+                logsContainer.appendChild(logEntry);
+            });
+        }
+
+        // Logout function
+        function logout() {
+            if (currentUser) {
+                delete activeUsers[currentUser];
+                localStorage.setItem('activeUsers', JSON.stringify(activeUsers));
+                logSecurityEvent(`User logged out: ${currentUser}`);
+            }
+            
+            currentUser = null;
+            isAdmin = false;
+            
+            document.getElementById('admin-dashboard').style.display = 'none';
+            document.getElementById('user-dashboard').style.display = 'none';
+            document.getElementById('login-container').style.display = 'flex';
+            
+            // Reset form
+            document.getElementById('login-form').reset();
+        }
+
+        // Check if user is remembered
+        function checkRememberedUser() {
+            const remembered = JSON.parse(localStorage.getItem('rememberedUser'));
+            if (remembered && users[remembered.username] && users[remembered.username].password === remembered.password) {
+                document.getElementById('username').value = remembered.username;
+                document.getElementById('password').value = remembered.password;
+                document.getElementById('remember').checked = true;
+            }
+        }
+
+        // Show forgot password modal
+        function showForgotPassword(e) {
+            e.preventDefault();
+            document.getElementById('forgot-modal').style.display = 'flex';
+        }
+
+        // Show terms modal
+        function showTerms(e) {
+            e.preventDefault();
+            document.getElementById('terms-modal').style.display = 'flex';
+        }
+
+        // Show privacy modal
+        function showPrivacy(e) {
+            e.preventDefault();
+            document.getElementById('privacy-modal').style.display = 'flex';
+        }
+
+        // Show theme modal
+        function showThemeModal() {
+            document.getElementById('theme-modal').style.display = 'flex';
+            
+            // Set current theme values
+            const currentTheme = users[currentUser].themePref || themes[0];
+            document.getElementById('bg-color').value = currentTheme.bg;
+            document.getElementById('text-color').value = currentTheme.text;
+            document.getElementById('primary-color').value = currentTheme.primary;
+            document.getElementById('secondary-color').value = currentTheme.secondary;
+        }
+
+        // Show add user modal
+        function showAddUserModal() {
+            document.getElementById('add-user-modal').style.display = 'flex';
+            document.getElementById('new-username').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+        }
+
+        // Save new user
+        function saveNewUser() {
+            const username = document.getElementById('new-username').value.trim();
+            const password = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (!username || !password) {
+                showWarning("Username and password are required", true);
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showWarning("Passwords do not match", true);
+                return;
+            }
+            
+            if (users[username]) {
+                showWarning("Username already exists", true);
+                return;
+            }
+            
+            // Add new user
+            users[username] = {
+                password: password,
+                isAdmin: false,
+                themePref: themes[0]
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Log security event
+            logSecurityEvent(`New user created: ${username} by admin: ${currentUser}`);
+            
+            // Update admin dashboard
+            updateAdminDashboard();
+            
+            // Close modal
+            closeModal();
+            
+            // Show success message
+            showWarning(`User ${username} created successfully`, false);
+        }
+
+        // Save theme preferences
+        function saveTheme() {
+            const bgColor = document.getElementById('bg-color').value;
+            const textColor = document.getElementById('text-color').value;
+            const primaryColor = document.getElementById('primary-color').value;
+            const secondaryColor = document.getElementById('secondary-color').value;
+            
+            // Update user's theme preferences
+            users[currentUser].themePref = {
+                bg: bgColor,
+                text: textColor,
+                primary: primaryColor,
+                secondary: secondaryColor
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Apply theme
+            applyTheme(users[currentUser].themePref);
+            
+            // Close modal
+            closeModal();
+            
+            // Show success message
+            showWarning("Theme saved successfully", false);
+        }
+
+        // Initialize theme selector
+        function initThemeSelector() {
+            const themeSelector = document.getElementById('theme-selector');
+            themeSelector.innerHTML = '';
+            
+            themes.forEach((theme, index) => {
+                const themeOption = document.createElement('div');
+                themeOption.className = 'theme-option';
+                themeOption.style.background = `linear-gradient(135deg, ${theme.primary} 0%, ${theme.secondary} 100%)`;
+                themeOption.textContent = theme.name;
+                themeOption.dataset.index = index;
+                
+                themeOption.addEventListener('click', () => {
+                    document.getElementById('bg-color').value = theme.bg;
+                    document.getElementById('text-color').value = theme.text;
+                    document.getElementById('primary-color').value = theme.primary;
+                    document.getElementById('secondary-color').value = theme.secondary;
+                    
+                    // Highlight selected theme
+                    document.querySelectorAll('.theme-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    themeOption.classList.add('active');
+                });
+                
+                themeSelector.appendChild(themeOption);
+            });
+        }
+
+        // Apply theme to the page
+        function applyTheme(theme) {
+            document.documentElement.style.setProperty('--dark-color', theme.bg);
+            document.documentElement.style.setProperty('--text-color', theme.text);
+            document.documentElement.style.setProperty('--primary-color', theme.primary);
+            document.documentElement.style.setProperty('--secondary-color', theme.secondary);
+        }
+
+        // Edit user
+        function editUser(username) {
+            showAddUserModal();
+            document.getElementById('new-username').value = username;
+            document.getElementById('new-username').readOnly = true;
+            document.getElementById('new-password').value = users[username].password;
+            document.getElementById('confirm-password').value = users[username].password;
+        }
+
+        // Ban user
+        function banUser(username) {
+            if (username === currentUser) {
+                showWarning("You cannot ban yourself", true);
+                return;
+            }
+            
+            if (confirm(`Are you sure you want to ban ${username}?`)) {
+                // Find device ID for this user
+                const deviceId = activeUsers[username];
+                if (deviceId) {
+                    bannedDevices.push(deviceId);
+                    localStorage.setItem('bannedDevices', JSON.stringify(bannedDevices));
+                    delete activeUsers[username];
+                    localStorage.setItem('activeUsers', JSON.stringify(activeUsers));
+                }
+                
+                logSecurityEvent(`User banned: ${username} by admin: ${currentUser}`);
+                updateAdminDashboard();
+                showWarning(`User ${username} has been banned`, false);
+            }
+        }
+
+        // Delete user
+        function deleteUser(username) {
+            if (username === currentUser) {
+                showWarning("You cannot delete yourself", true);
+                return;
+            }
+            
+            if (confirm(`Are you sure you want to permanently delete ${username}?`)) {
+                delete users[username];
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // Remove from active users if logged in
+                if (activeUsers[username]) {
+                    delete activeUsers[username];
+                    localStorage.setItem('activeUsers', JSON.stringify(activeUsers));
+                }
+                
+                logSecurityEvent(`User deleted: ${username} by admin: ${currentUser}`);
+                updateAdminDashboard();
+                showWarning(`User ${username} has been deleted`, false);
+            }
+        }
+
+        // Ban device
+        function banDevice(deviceId) {
+            if (!bannedDevices.includes(deviceId)) {
+                bannedDevices.push(deviceId);
+                localStorage.setItem('bannedDevices', JSON.stringify(bannedDevices));
+            }
+        }
+
+        // Show warning modal
+        function showWarning(message, isError) {
+            const warningModal = document.getElementById('warning-modal');
+            document.getElementById('warning-message').textContent = message;
+            warningModal.style.display = 'flex';
+            
+            if (isError) {
+                document.getElementById('warning-sound').play();
+                warningModal.querySelector('.modal-content').classList.add('shake');
+                setTimeout(() => {
+                    warningModal.querySelector('.modal-content').classList.remove('shake');
+                }, 500);
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+
+        // Play welcome sound
+        function playWelcomeSound(username) {
+            const welcomeSound = document.getElementById('welcome-sound');
+            const welcomeMessages = [
+                `Welcome back ${username}! Ready to make some pips?`,
+                `Great to see you again ${username}! The market is waiting.`,
+                `${username}, discipline creates consistency. Let's trade smart.`
+            ];
+            
+            // Only play full message on first login
+            if (!localStorage.getItem(`welcomed-${username}`)) {
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = `Welcome ${username}! Thank you for purchasing the Beast Strategy. This book will change many things in your trading. Be ready to apply what you learn with discipline.`;
+                window.speechSynthesis.speak(msg);
+                localStorage.setItem(`welcomed-${username}`, 'true');
+            } else {
+                const randomMsg = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+                const msg = new SpeechSynthesisUtterance(randomMsg);
+                window.speechSynthesis.speak(msg);
+            }
+            
+            welcomeSound.play();
+        }
+
+        // Log security event
+        function logSecurityEvent(event) {
+            securityLogs.push({
+                timestamp: new Date().toISOString(),
+                event: event
+            });
+            
+            // Keep only the last 100 logs
+            if (securityLogs.length > 100) {
+                securityLogs.shift();
+            }
+            
+            localStorage.setItem('securityLogs', JSON.stringify(securityLogs));
+        }
+
+        // Navigate between strategy pages
+        function navigatePage(e) {
+            const targetPage = e.target.classList.contains('next-btn') ? 
+                parseInt(e.target.dataset.next) : 
+                parseInt(e.target.dataset.prev);
+            
+            // Hide current page
+            document.getElementById(`page-${currentPage}`).style.display = 'none';
+            
+            // Show target page
+            document.getElementById(`page-${targetPage}`).style.display = 'block';
+            currentPage = targetPage;
+        }
+
+        // Submit vote
+        function submitVote(type) {
+            if (!currentUser) return;
+            
+            if (type === 'like') {
+                if (!userFeedback.likes.includes(currentUser)) {
+                    userFeedback.likes.push(currentUser);
+                    // Remove from dislikes if previously disliked
+                    userFeedback.dislikes = userFeedback.dislikes.filter(u => u !== currentUser);
+                }
+            } else {
+                if (!userFeedback.dislikes.includes(currentUser)) {
+                    userFeedback.dislikes.push(currentUser);
+                    // Remove from likes if previously liked
+                    userFeedback.likes = userFeedback.likes.filter(u => u !== currentUser);
+                }
+            }
+            
+            localStorage.setItem('userFeedback', JSON.stringify(userFeedback));
+            
+            if (isAdmin) {
+                updateAdminDashboard();
+            }
+            
+            showWarning(`Thank you for your ${type === 'like' ? 'positive' : 'feedback'} vote!`, false);
+        }
+
+        // Update session tracker
+        function updateSessionTracker() {
+            const now = new Date();
+            const gmtHours = now.getUTCHours();
+            const gmtMinutes = now.getUTCMinutes();
+            const timeString = `${gmtHours.toString().padStart(2, '0')}:${gmtMinutes.toString().padStart(2, '0')} GMT`;
+            
+            document.getElementById('current-time').textContent = timeString;
+            
+            let sessionStatus = '';
+            let sessionStrength = 0;
+            let recommendation = '';
+            
+            if (gmtHours >= 0 && gmtHours < 5) {
+                sessionStatus = 'Asian Session (Low Volatility)';
+                sessionStrength = 20;
+                recommendation = 'Not recommended for trading. Best for analysis.';
+            } else if (gmtHours >= 5 && gmtHours < 8) {
+                sessionStatus = 'Asian-London Overlap (Medium Volatility)';
+                sessionStrength = 40;
+                recommendation = 'Caution - Wait for London open for better setups.';
+            } else if (gmtHours >= 8 && gmtHours < 12) {
+                sessionStatus = 'London Session (High Volatility)';
+                sessionStrength = 80;
+                recommendation = 'Best time for gold trades. Look for breakouts.';
+            } else if (gmtHours >= 12 && gmtHours < 16) {
+                sessionStatus = 'London-New York Overlap (Very High Volatility)';
+                sessionStrength = 100;
+                recommendation = 'Prime trading time for all instruments.';
+            } else if (gmtHours >= 16 && gmtHours < 20) {
+                sessionStatus = 'New York Session (High Volatility)';
+                sessionStrength = 70;
+                recommendation = 'Good for USD pairs. Watch for reversals.';
+            } else {
+                sessionStatus = 'Evening Session (Low Volatility)';
+                sessionStrength = 30;
+                recommendation = 'Limited opportunities. Prepare for next day.';
+            }
+            
+            document.getElementById('session-status').textContent = sessionStatus;
+            document.getElementById('session-progress').style.width = `${sessionStrength}%`;
+            document.getElementById('strength-meter').style.width = `${sessionStrength}%`;
+            document.getElementById('session-recommendation').textContent = recommendation;
+        }
+
+        // Initialize custom cursor effect
+        function initCustomCursor() {
+            const cursor = document.querySelector('.custom-cursor');
+            const trail = document.querySelector('.cursor-trail');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.clientX}px`;
+                cursor.style.top = `${e.clientY}px`;
+                
+                setTimeout(() => {
+                    trail.style.left = `${e.clientX}px`;
+                    trail.style.top = `${e.clientY}px`;
+                }, 100);
+            });
+            
+            // Change cursor on interactive elements
+            const interactiveElements = ['button', 'a', 'input', 'textarea', 'select'];
+            interactiveElements.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                        cursor.style.background = 'rgba(255, 45, 117, 0.8)';
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                        cursor.style.background = 'rgba(255, 45, 117, 0.5)';
+                    });
+                });
+            });
+        }
+
+        // Prevent copy/paste
+        function preventCopy(e) {
+            e.preventDefault();
+            showWarning("Copying content is not allowed on this site", true);
+        }
+
+        // Prevent right click
+        function preventRightClick(e) {
+            e.preventDefault();
+            showWarning("Right-click is disabled on this site", true);
+        }
+
+        // Prevent screen capture shortcuts
+        function preventScreenCapture(e) {
+            // Disable Print Screen, Ctrl+P, Ctrl+S, etc.
+            const blockedKeys = [44, 80, 83]; // PrintScreen, P, S
+            const blockedCombos = [
+                { key: 67, ctrl: true }, // Ctrl+C
+                { key: 86, ctrl: true }, // Ctrl+V
+                { key: 65, ctrl: true }, // Ctrl+A
+                { key: 83, ctrl: true }, // Ctrl+S
+                { key: 80, ctrl: true }, // Ctrl+P
+                { key: 73, ctrl: true }, // Ctrl+I
+                { key: 85, ctrl: true }, // Ctrl+U
+                { key: 123 } // F12
+            ];
+            
+            // Check for blocked keys
+            if (blockedKeys.includes(e.keyCode)) {
+                e.preventDefault();
+                showWarning("This action is not allowed", true);
+                return;
+            }
+            
+            // Check for blocked key combinations
+            for (const combo of blockedCombos) {
+                if (e.keyCode === combo.key && 
+                    (combo.ctrl ? e.ctrlKey : true) && 
+                    (combo.shift ? e.shiftKey : true) && 
+                    (combo.alt ? e.altKey : true)) {
+                    e.preventDefault();
+                    showWarning("This action is not allowed", true);
+                    return;
+                }
+            }
+            
+            // Disable F12, Ctrl+Shift+I, etc. for dev tools
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || 
+                (e.ctrlKey && e.shiftKey && e.keyCode === 74) || 
+                (e.ctrlKey && e.shiftKey && e.keyCode === 67)) {
+                e.preventDefault();
+                showWarning("Developer tools are disabled on this site", true);
+            }
+        }
+    </script>
+</body>
+</html>
